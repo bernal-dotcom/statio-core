@@ -1,9 +1,17 @@
 from django.db import models
 
 class CrewMember(models.Model):
+
+    STATUS_CHOICE = [
+        ("ACTIVE", "Active"),
+        ("MIA", "Missing in Action"),
+        ("KIA", "Killed in Action"),
+    ]
+
     name = models.CharField(max_length=100)
     role = models.CharField(max_length=100)
     oxygen_consumption = models.FloatField(default=0.5)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICE, default="ACTIVE")
 
     def __str__(self):
         return f"{self.name} - {self.role}"
