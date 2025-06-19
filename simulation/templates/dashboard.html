@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Station Core Panel</title>
+  <style>
+    body {
+      background: #111;
+      color: #eee;
+      font-family: 'Courier New', monospace;
+      margin: 0;
+      padding: 2rem;
+    }
+    h1 {
+      color: #00ffcc;
+      border-bottom: 2px solid #00ffcc;
+      padding-bottom: 0.5rem;
+    }
+    section {
+      margin-bottom: 2rem;
+      padding: 1rem;
+      border: 2px solid #555;
+      background-color: #1a1a1a;
+    }
+    .critical { color: #ff4444; }
+    .warning { color: #ffaa00; }
+    .online { color: #44ff44; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid #444;
+      padding: 0.5rem;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <h1>🛰 STATION CORE PANEL</h1>
+
+  <section>
+    <h2>👩‍🚀 Crew Members</h2>
+    <table>
+      <tr><th>Name</th><th>Role</th><th>Status</th><th>O2 Consumption</th></tr>
+      {% for crew in crew_list %}
+      <tr>
+        <td>{{ crew.name }}</td>
+        <td>{{ crew.role }}</td>
+        <td class="{{ crew.status|lower }}">{{ crew.status }}</td>
+        <td>{{ crew.oxygen_consumption }} L/min</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </section>
+
+  <section>
+    <h2>🧪 Oxygen Systems</h2>
+    <table>
+      <tr><th>Level (%)</th><th>Production Rate</th><th>Status</th></tr>
+      {% for oxygen in oxygen_list %}
+      <tr>
+        <td>{{ oxygen.level }}</td>
+        <td>{{ oxygen.prodution_rate }} L/min</td>
+        <td class="{{ oxygen.status|lower }}">{{ oxygen.status }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </section>
+
+  <section>
+    <h2>📡 Ship Status Logs</h2>
+    <table>
+      <tr><th>Time</th><th>Oxygen Level</th><th>Crew Count</th><th>Alert</th></tr>
+      {% for status in status_list %}
+      <tr>
+        <td>{{ status.timestamp }}</td>
+        <td>{{ status.oxygen_level }}</td>
+        <td>{{ status.crew_count }}</td>
+        <td>{{ status.alert }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </section>
+
+</body>
+</html>
